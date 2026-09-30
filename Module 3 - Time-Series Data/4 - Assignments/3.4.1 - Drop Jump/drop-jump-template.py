@@ -74,7 +74,7 @@ def main(full_path_to_file):
 
     # make a variable to hold the INDEX of that take-off point. We will later convert that
     # index to time based upon the force plate sample rate
-    take_off_index = index 
+    take_off_index = -1
 
     # iterate through force plate data but do not begin at the start of the array
     # being after the user has taken off. If the searching starts at the beginning again
@@ -107,11 +107,11 @@ def main(full_path_to_file):
         if value > baseline + delta:
             second_landing_index = index
             break
-        time_of_contact = (take_off_index - first_landing_index) / sampling_rate
+        
     # Step 5: calculate the time of contact on plate and time of flight in air
 
     # calculate tc and convert to seconds using the sampling rate
-    time_of_contact = (second_landing_index - first_landing_index) / sampling_rate
+    time_of_contact = (take_off_index - first_landing_index) / sampling_rate
 
     # calculate tf and convert to seconds using the sampling rate
     time_of_flight = (second_landing_index - take_off_index) / sampling_rate
